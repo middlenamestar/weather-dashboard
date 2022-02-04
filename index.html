@@ -17,12 +17,14 @@
         <div class="row">
             <!-- SEARCH BAR -->
             <div class="card col-xl-3">
-                <form id="search-form">
-                    <label class="form-label" for="city-input">Search for a City,</label>
-                    <input name="city-input" id="city-input" type="text" autofocus="true" class="form-input"/>
-                    <button type="submit" id="search-btn" class="btn btn-primary">search🔍</button>
+                <form id="search-form" class="my-1">
+                    <label class="form-label" for="city-input">Search for a city anywhere in the world:</label>
+                    <input name="city-input" id="city-input" type="text" autofocus="true" class="my-1 form-input"/>
+                    <button type="submit" id="search-btn" class="my-1 btn btn-primary">search🔍</button>
                 </form>
                 <!-- somewhere to include search history. -->
+                <h5 class="my-1">Your search history:</h5>
+                <div id="history" class="container"></div>
             </div>
             <!-- CURRENT WEATHER. CARD. -->
             <div id="current-weather" class="card col-xl-9">

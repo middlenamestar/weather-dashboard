@@ -74,21 +74,144 @@ var dateFive = date.add(1, 'days').format("dddd, MMMM Do");
 $("#date-five").text(dateFive);
 // console.log(dateFive);
 
+var dateOne = $("#date-one");
 var tempOne = $("#temp-one");
 var humidOne = $("#humid-one");
 var windOne = $("#wind-one");
 
+var dateTwo = $("#date-two");
+var tempTwo = $("#temp-two");
+var humidTwo = $("#humid-two");
+var windTwo = $("#wind-two");
 
+var dateThree = $("#date-three");
+var tempThree = $("#temp-three");
+var humidThree = $("#humid-three");
+var windThree = $("#wind-three");
+
+var dateFour = $("#date-four");
+var tempFour = $("#temp-four");
+var humidFour = $("#humid-four");
+var windFour = $("#wind-four");
+
+var dateFive = $("#date-five");
+var tempFive = $("#temp-five");
+var humidFive = $("#humid-five");
+var windFive = $("#wind-five");
 
 
 // FORM
 var searchBtn = $("#search-btn");
 var cityInput = $("#city-input");
+var searchHistory = $("#history");
+
+// SET LONDON AS DEFAULT.
+function london(){
+    // this fetch is just to get the name to appear on page b/c onecall does not have NAME in data.
+    fetch("https://api.openweathermap.org/geo/1.0/direct?q=london&appid=8ee06b00fae45decc9bb95425a69991a")
+        .then(function(response){
+        return response.json();
+        })
+        .then(function(data){
+            var state = data[0].state;
+            var name = data[0].name;
+            cityName.text("Currently in: " + name + ", " + state);
+            fetch("https://api.openweathermap.org/data/2.5/onecall?lat=51.5073219&lon=-0.1276474&exclude=minutely,hourly,alerts&units=imperial&appid=8ee06b00fae45decc9bb95425a69991a")
+                .then(function(response){
+                    return response.json();
+                })
+                .then(function(data){
+                    var currentTemp = data.current.temp;
+                    currentTempIcon.text(currentTemp + "˚");
+                    var currentIcon = data.current.weather[0].icon;
+                    var currentIconImage = new Image();
+                    currentIconImage.src = "http://openweathermap.org/img/wn/" + currentIcon + ".png";
+                    currentTempIcon.append(currentIconImage);
+                    var currentHumid = data.current.humidity;
+                    currentHumidity.text("Humidity: " + currentHumid + "%");
+                    var currentWind = data.current.wind_speed;
+                    currentWindSpeed.text("Wind Speed: " + currentWind + " mph");
+                    var currentUVIndex = data.current.uvi;
+                    currentUV.text(currentUVIndex);
+                        if(currentUVIndex >= 0 && currentUVIndex <= 2){
+                            currentUV.addClass("uv-green");
+                        } else if(currentUVIndex >= 3 && currentUVIndex <= 7){
+                            currentUV.addClass("uv-orange");
+                        } else if(currentUVIndex >= 8){
+                            currentUV.addClass("uv-red");
+                        }
+                    //5 DAY.
+                    // first day.
+                    // console.log(data);
+                    var iconOne = data.daily[0].weather[0].icon;
+                    var iconOneImage = new Image();
+                    iconOneImage.src = "http://openweathermap.org/img/wn/" + iconOne + ".png";
+                    dateOne.append(iconOneImage); // oop. don't know why NOW append creates multiple images when user searches for new city.
+                    var temperatureOne = data.daily[0].temp.day;
+                    tempOne.text("Temperature during day: " + temperatureOne + "˚");
+                    var humidityOne = data.daily[0].humidity;
+                    humidOne.text("Humidity: " + humidityOne + "%");
+                    var windSpeedOne = data.daily[0].wind_speed;
+                    windOne.text("Wind Speed: " + windSpeedOne + " mph");
+                    // console.log(temperatureOne);
+                    // two.
+                    var iconTwo = data.daily[1].weather[0].icon;
+                    // console.log(iconTwo);
+                    var iconTwoImage = new Image();
+                    iconTwoImage.src = "http://openweathermap.org/img/wn/" + iconTwo + ".png";
+                    dateTwo.append(iconTwoImage);
+                    var temperatureTwo = data.daily[1].temp.day;
+                    tempTwo.text("Temperature during day: " + temperatureTwo + "˚");
+                    var humidityTwo = data.daily[1].humidity;
+                    humidTwo.text("Humidity: " + humidityTwo + "%");
+                    var windSpeedTwo = data.daily[1].wind_speed;
+                    windTwo.text("Wind Speed: " + windSpeedTwo + " mph");
+                    // three.
+                    var iconThree = data.daily[2].weather[0].icon;
+                    var iconThreeImage = new Image();
+                    iconThreeImage.src = "http://openweathermap.org/img/wn/" + iconThree + ".png";
+                    dateThree.append(iconThreeImage);
+                    var temperatureThree = data.daily[2].temp.day;
+                    tempThree.text("Temperature during day: " + temperatureThree + "˚");
+                    var humidityThree = data.daily[2].humidity;
+                    humidThree.text("Humidity: " + humidityThree + "%");
+                    var windSpeedThree = data.daily[2].wind_speed;
+                    windThree.text("Wind Speed: " + windSpeedThree + " mph");
+                    // four.
+                    var iconFour = data.daily[3].weather[0].icon;
+                    var iconFourImage = new Image();
+                    iconFourImage.src = "http://openweathermap.org/img/wn/" + iconFour + ".png";
+                    dateFour.append(iconFourImage);
+                    var temperatureFour = data.daily[3].temp.day;
+                    tempFour.text("Temperature during day: " + temperatureFour + "˚");
+                    var humidityFour= data.daily[3].humidity;
+                    humidFour.text("Humidity: " + humidityFour + "%");
+                    var windSpeedFour = data.daily[3].wind_speed;
+                    windFour.text("Wind Speed: " + windSpeedFour + " mph");
+                    // five.
+                    var iconFive = data.daily[4].weather[0].icon;
+                    var iconFiveImage = new Image();
+                    iconFiveImage.src = "http://openweathermap.org/img/wn/" + iconFive + ".png";
+                    dateFive.append(iconFiveImage);
+                    var temperatureFive = data.daily[4].temp.day;
+                    tempFive.text("Temperature during day: " + temperatureFive + "˚");
+                    var humidityFive = data.daily[4].humidity;
+                    humidFive.text("Humidity: " + humidityFive + "%");
+                    var windSpeedFive = data.daily[4].wind_speed;
+                    windFive.text("Wind Speed: " + windSpeedFive + " mph");
+                });
+        });
+};
+
+
 
 // when user clicks search submit form.
 function searchCity(event){
     event.preventDefault();
     var userInput = cityInput.val();
+    localStorage.setItem("cities", userInput);
+    var city = localStorage.getItem("cities");
+    $(`<p id="city-again">${city}</p>`).appendTo(searchHistory); // the id is for calling the function again when user clicks on city in search history.
     // console.log(userInput);
     // GEO
     fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + userInput + "&appid=8ee06b00fae45decc9bb95425a69991a")
@@ -130,12 +253,12 @@ function searchCity(event){
                             currentUV.addClass("uv-red");
                         }
                     //5 DAY FORECAST
-                    // loop would have gone here.
+                    // first day.
                     var iconOne = data.daily[0].weather[0].icon;
-                    console.log(iconOne);
+                    // console.log(iconOne);
                     var iconOneImage = new Image();
                     iconOneImage.src = "http://openweathermap.org/img/wn/" + iconOne + ".png";
-                    $("#date-one").append(iconOneImage); // oop. don't know why NOW append creates multiple images when user searches for new city.
+                    dateOne.append(iconOneImage); // oop. don't know why NOW append creates multiple images when user searches for new city.
                     var temperatureOne = data.daily[0].temp.day;
                     tempOne.text("Temperature during day: " + temperatureOne + "˚");
                     var humidityOne = data.daily[0].humidity;
@@ -143,19 +266,63 @@ function searchCity(event){
                     var windSpeedOne = data.daily[0].wind_speed;
                     windOne.text("Wind Speed: " + windSpeedOne + " mph");
                     // console.log(temperatureOne);
-                    
-                })
-        })
-}
-
+                    // two.
+                    var iconTwo = data.daily[1].weather[0].icon;
+                    // console.log(iconTwo);
+                    var iconTwoImage = new Image();
+                    iconTwoImage.src = "http://openweathermap.org/img/wn/" + iconTwo + ".png";
+                    dateTwo.append(iconTwoImage);
+                    var temperatureTwo = data.daily[1].temp.day;
+                    tempTwo.text("Temperature during day: " + temperatureTwo + "˚");
+                    var humidityTwo = data.daily[1].humidity;
+                    humidTwo.text("Humidity: " + humidityTwo + "%");
+                    var windSpeedTwo = data.daily[1].wind_speed;
+                    windTwo.text("Wind Speed: " + windSpeedTwo + " mph");
+                    // three.
+                    var iconThree = data.daily[2].weather[0].icon;
+                    var iconThreeImage = new Image();
+                    iconThreeImage.src = "http://openweathermap.org/img/wn/" + iconThree + ".png";
+                    dateThree.append(iconThreeImage);
+                    var temperatureThree = data.daily[2].temp.day;
+                    tempThree.text("Temperature during day: " + temperatureThree + "˚");
+                    var humidityThree = data.daily[2].humidity;
+                    humidThree.text("Humidity: " + humidityThree + "%");
+                    var windSpeedThree = data.daily[2].wind_speed;
+                    windThree.text("Wind Speed: " + windSpeedThree + " mph");
+                    // four.
+                    var iconFour = data.daily[3].weather[0].icon;
+                    var iconFourImage = new Image();
+                    iconFourImage.src = "http://openweathermap.org/img/wn/" + iconFour + ".png";
+                    dateFour.append(iconFourImage);
+                    var temperatureFour = data.daily[3].temp.day;
+                    tempFour.text("Temperature during day: " + temperatureFour + "˚");
+                    var humidityFour= data.daily[3].humidity;
+                    humidFour.text("Humidity: " + humidityFour + "%");
+                    var windSpeedFour = data.daily[3].wind_speed;
+                    windFour.text("Wind Speed: " + windSpeedFour + " mph");
+                    // five.
+                    var iconFive = data.daily[4].weather[0].icon;
+                    var iconFiveImage = new Image();
+                    iconFiveImage.src = "http://openweathermap.org/img/wn/" + iconFive + ".png";
+                    dateFive.append(iconFiveImage);
+                    var temperatureFive = data.daily[4].temp.day;
+                    tempFive.text("Temperature during day: " + temperatureFive + "˚");
+                    var humidityFive = data.daily[4].humidity;
+                    humidFive.text("Humidity: " + humidityFive + "%");
+                    var windSpeedFive = data.daily[4].wind_speed;
+                    windFive.text("Wind Speed: " + windSpeedFive + " mph");
+                });
+        });
+};
+london();
 searchBtn.on("click", searchCity);
+// $("#city-again").on("click", searchCity);
 
 
+// have to hard code a location or name in to the LOCATION h3 so that it's not blank when user has not inputted.🤎
+// for temperature and icon, too. pretty much all the information...🤎
 
-// have to hard code a location or name in to the LOCATION h3 so that it's not blank when user has not inputted.
-// for temperature and icon, too. pretty much all the information...
 
-// LOOP IF I WOULD HAVE USED IT.
 // data.daily.length = 5;
 // console.log(data.daily);
 // data.daily[0] for the 1st day. data.daily[0].humidity
@@ -166,4 +333,18 @@ searchBtn.on("click", searchCity);
     // var dailyWind = data.daily[i].windspeed;
     // var dailyTemp = data.daily[i].temp.day;
     // var dailyIcon = data.daily[i].weather[0].icon;
+// }
+
+// unfinished loop. just decided to hard code the forecast.
+// data.daily.length = 5;
+// for(var i = 0; i < data.daily.length; i++){
+//     var forecastDateIcon = $()
+//     var dailyTemp = data.daily[i].temp.day;
+//     var dailyIcon = data.daily[i].weather[0].icon;
+//     var dailyIconImage = new Image();
+//     dailyIconImage.src = "http://openweathermap.org/img/wn/" + dailyIcon + ".png";
+//     var dailyHumidity = data.daily[i].humidity;
+//     var dailyWind = data.daily[i].windspeed;
+//     var forecastContainer = $("#forecast");
+//     $(`${dailyIconImage}`).appendTo(mainBox)
 // }
