@@ -6,6 +6,14 @@
     border: solid 2px black;
 } */
 
+#title{
+    font-size: larger;
+}
+
+#header-description{
+    font-style: italic;
+}
+
 .uv-green{
     color: green;
 }
@@ -16,4 +24,8 @@
 
 .uv-red{
     color: red;
+}
+
+footer{
+    font-size: small;
 }
