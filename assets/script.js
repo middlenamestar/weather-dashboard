@@ -146,7 +146,7 @@ function london(){
                     var iconOne = data.daily[0].weather[0].icon;
                     var iconOneImage = new Image();
                     iconOneImage.src = "http://openweathermap.org/img/wn/" + iconOne + ".png";
-                    dateOne.append(iconOneImage); // oop. don't know why NOW append creates multiple images when user searches for new city.
+                    dateOne.append(iconOneImage);
                     var temperatureOne = data.daily[0].temp.day;
                     tempOne.text("Temperature during day: " + temperatureOne + "˚");
                     var humidityOne = data.daily[0].humidity;
