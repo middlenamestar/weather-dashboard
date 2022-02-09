@@ -146,7 +146,7 @@ function london(){
                     var iconOne = data.daily[0].weather[0].icon;
                     var iconOneImage = new Image();
                     iconOneImage.src = "http://openweathermap.org/img/wn/" + iconOne + ".png";
-                    dateOne.append(iconOneImage);
+                    $("#one-icon").html(iconOneImage);
                     var temperatureOne = data.daily[0].temp.day;
                     tempOne.text("Temperature during day: " + temperatureOne + "˚");
                     var humidityOne = data.daily[0].humidity;
@@ -159,7 +159,7 @@ function london(){
                     // console.log(iconTwo);
                     var iconTwoImage = new Image();
                     iconTwoImage.src = "http://openweathermap.org/img/wn/" + iconTwo + ".png";
-                    dateTwo.append(iconTwoImage);
+                    $("#two-icon").html(iconTwoImage);
                     var temperatureTwo = data.daily[1].temp.day;
                     tempTwo.text("Temperature during day: " + temperatureTwo + "˚");
                     var humidityTwo = data.daily[1].humidity;
@@ -170,7 +170,7 @@ function london(){
                     var iconThree = data.daily[2].weather[0].icon;
                     var iconThreeImage = new Image();
                     iconThreeImage.src = "http://openweathermap.org/img/wn/" + iconThree + ".png";
-                    dateThree.append(iconThreeImage);
+                    $("#three-icon").html(iconThreeImage);
                     var temperatureThree = data.daily[2].temp.day;
                     tempThree.text("Temperature during day: " + temperatureThree + "˚");
                     var humidityThree = data.daily[2].humidity;
@@ -181,7 +181,7 @@ function london(){
                     var iconFour = data.daily[3].weather[0].icon;
                     var iconFourImage = new Image();
                     iconFourImage.src = "http://openweathermap.org/img/wn/" + iconFour + ".png";
-                    dateFour.append(iconFourImage);
+                    $("#four-icon").html(iconFourImage);
                     var temperatureFour = data.daily[3].temp.day;
                     tempFour.text("Temperature during day: " + temperatureFour + "˚");
                     var humidityFour= data.daily[3].humidity;
@@ -192,7 +192,7 @@ function london(){
                     var iconFive = data.daily[4].weather[0].icon;
                     var iconFiveImage = new Image();
                     iconFiveImage.src = "http://openweathermap.org/img/wn/" + iconFive + ".png";
-                    dateFive.append(iconFiveImage);
+                    $("#five-icon").html(iconFiveImage);
                     var temperatureFive = data.daily[4].temp.day;
                     tempFive.text("Temperature during day: " + temperatureFive + "˚");
                     var humidityFive = data.daily[4].humidity;
@@ -202,8 +202,6 @@ function london(){
                 });
         });
 };
-
-
 
 // when user clicks search submit form.
 function searchCity(event){
@@ -258,7 +256,7 @@ function searchCity(event){
                     // console.log(iconOne);
                     var iconOneImage = new Image();
                     iconOneImage.src = "http://openweathermap.org/img/wn/" + iconOne + ".png";
-                    dateOne.append(iconOneImage); // oop. don't know why NOW append creates multiple images when user searches for new city.
+                    $("#one-icon").html(iconOneImage);
                     var temperatureOne = data.daily[0].temp.day;
                     tempOne.text("Temperature during day: " + temperatureOne + "˚");
                     var humidityOne = data.daily[0].humidity;
@@ -271,7 +269,7 @@ function searchCity(event){
                     // console.log(iconTwo);
                     var iconTwoImage = new Image();
                     iconTwoImage.src = "http://openweathermap.org/img/wn/" + iconTwo + ".png";
-                    dateTwo.append(iconTwoImage);
+                    $("#two-icon").html(iconTwoImage);
                     var temperatureTwo = data.daily[1].temp.day;
                     tempTwo.text("Temperature during day: " + temperatureTwo + "˚");
                     var humidityTwo = data.daily[1].humidity;
@@ -282,7 +280,7 @@ function searchCity(event){
                     var iconThree = data.daily[2].weather[0].icon;
                     var iconThreeImage = new Image();
                     iconThreeImage.src = "http://openweathermap.org/img/wn/" + iconThree + ".png";
-                    dateThree.append(iconThreeImage);
+                    $("#three-icon").html(iconThreeImage);
                     var temperatureThree = data.daily[2].temp.day;
                     tempThree.text("Temperature during day: " + temperatureThree + "˚");
                     var humidityThree = data.daily[2].humidity;
@@ -293,7 +291,7 @@ function searchCity(event){
                     var iconFour = data.daily[3].weather[0].icon;
                     var iconFourImage = new Image();
                     iconFourImage.src = "http://openweathermap.org/img/wn/" + iconFour + ".png";
-                    dateFour.append(iconFourImage);
+                    $("#four-icon").html(iconFourImage);
                     var temperatureFour = data.daily[3].temp.day;
                     tempFour.text("Temperature during day: " + temperatureFour + "˚");
                     var humidityFour= data.daily[3].humidity;
@@ -304,7 +302,7 @@ function searchCity(event){
                     var iconFive = data.daily[4].weather[0].icon;
                     var iconFiveImage = new Image();
                     iconFiveImage.src = "http://openweathermap.org/img/wn/" + iconFive + ".png";
-                    dateFive.append(iconFiveImage);
+                    $("#five-icon").html(iconFiveImage);
                     var temperatureFive = data.daily[4].temp.day;
                     tempFive.text("Temperature during day: " + temperatureFive + "˚");
                     var humidityFive = data.daily[4].humidity;
@@ -317,6 +315,32 @@ function searchCity(event){
 london();
 searchBtn.on("click", searchCity);
 // $("#city-again").on("click", searchCity);
+
+
+
+let searchH = []; //final thing locstor will pull from.
+
+// when user clicks on search, that is when userinput gets stored into locstor, in an array. and with each input, gets stored. push?
+// set the empty array in locstor and keep pushing?
+
+// searchbutton.on("click", function)
+// function(){
+    // #city-input.push(newArray);
+// }
+// also, if newArray.lenth < 5{
+    // function 
+// } else{
+// }
+
+// stringify
+
+
+
+
+
+
+
+
 
 // have bug of newly searched weather icon adding onto 5-day instead of replacing the default weather icon.
 
