@@ -206,10 +206,12 @@ function london(){
 // when user clicks search submit form.
 function searchCity(event){
     event.preventDefault();
-    var userInput = cityInput.val();
-    localStorage.setItem("cities", userInput);
-    var city = localStorage.getItem("cities");
-    $(`<p id="city-again">${city}</p>`).appendTo(searchHistory); // the id is for calling the function again when user clicks on city in search history. need to figure out local storage array first before allowing user to click on city to call function again.
+    var userInput = [];
+    userInput.push(cityInput.val());
+    localStorage.setItem("cities", JSON.stringify(userInput));
+    console.log(userInput);
+    // var city = localStorage.getItem("cities");
+    // $(`<p id="city-again">${city}</p>`).appendTo(searchHistory); // the id is for calling the function again when user clicks on city in search history. need to figure out local storage array first before allowing user to click on city to call function again.
     // console.log(userInput);
     // GEO
     fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + userInput + "&appid=8ee06b00fae45decc9bb95425a69991a")
@@ -341,8 +343,6 @@ let searchH = []; //final thing locstor will pull from.
 
 
 
-
-// have bug of newly searched weather icon adding onto 5-day instead of replacing the default weather icon.
 
 
 // have to hard code a location or name in to the LOCATION h3 so that it's not blank when user has not inputted.🤎
