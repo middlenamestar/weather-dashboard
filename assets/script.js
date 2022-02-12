@@ -211,28 +211,38 @@ function london(){
         });
 };
 
-// when user clicks search submit form.
+
+
+// when user clicks search button: saves city(s) in local storage, appends to search history, calls apis & displays current and forecast info.
 function searchCity(event){
     event.preventDefault();
-
-
     userInput.push(cityInput.val());
     localStorage.setItem("cities", JSON.stringify(userInput));
     // console.log(userInput);
     var city = JSON.parse(localStorage.getItem("cities"));
-    
-    
-    
-    // for(const oneCity of city){
-    //     console.log(oneCity);
-    // }
+    var lastCity = city.pop();
+    $(`<p>${lastCity}</p>`).appendTo(searchHistory);
 
+    
+// function displayHistory(){
+//     var city = JSON.parse(localStorage.getItem("cities"));
+//     var lastCity = city.pop();
+    // console.log(lastCity);
 
-    // $(`<p id="city-again">${city}</p>`).appendTo(searchHistory); // the id is for calling the function again when user clicks on city in search history. need to figure out local storage array first before allowing user to click on city to call function again.
+    // simply appends to search history area.
+    // $(`<p>${lastCity}</p>`).appendTo(searchHistory);
+
+    // gotta make use of the last city variable in order to display current weather, and forecast data.
+// }
+
+// function currentWeather(){
+// }
+
+// var i = searchHistory.length - 1; i >= 0; i--
 
 
     // GEO
-    fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + userInput + "&appid=8ee06b00fae45decc9bb95425a69991a")
+    fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + lastCity + "&appid=8ee06b00fae45decc9bb95425a69991a")
         .then(function(response){
             return response.json();
         })
@@ -340,7 +350,7 @@ searchBtn.on("click", searchCity);
 
 
 
-let searchH = []; //final thing locstor will pull from.
+// let searchH = []; //final thing locstor will pull from.
 
 // when user clicks on search, that is when userinput gets stored into locstor, in an array. and with each input, gets stored. push?
 // set the empty array in locstor and keep pushing?
@@ -355,11 +365,6 @@ let searchH = []; //final thing locstor will pull from.
 // }
 
 // stringify
-
-
-
-
-
 
 
 
