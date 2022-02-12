@@ -105,6 +105,14 @@ var searchBtn = $("#search-btn");
 var cityInput = $("#city-input");
 var searchHistory = $("#history");
 
+// array
+var userInput = [];
+
+
+
+
+
+
 // SET LONDON AS DEFAULT.
 function london(){
     // this fetch is just to get the name to appear on page b/c onecall does not have NAME in data.
@@ -206,13 +214,23 @@ function london(){
 // when user clicks search submit form.
 function searchCity(event){
     event.preventDefault();
-    var userInput = [];
+
+
     userInput.push(cityInput.val());
     localStorage.setItem("cities", JSON.stringify(userInput));
-    console.log(userInput);
-    // var city = localStorage.getItem("cities");
-    // $(`<p id="city-again">${city}</p>`).appendTo(searchHistory); // the id is for calling the function again when user clicks on city in search history. need to figure out local storage array first before allowing user to click on city to call function again.
     // console.log(userInput);
+    var city = JSON.parse(localStorage.getItem("cities"));
+    
+    
+    
+    // for(const oneCity of city){
+    //     console.log(oneCity);
+    // }
+
+
+    // $(`<p id="city-again">${city}</p>`).appendTo(searchHistory); // the id is for calling the function again when user clicks on city in search history. need to figure out local storage array first before allowing user to click on city to call function again.
+
+
     // GEO
     fetch("https://api.openweathermap.org/geo/1.0/direct?q=" + userInput + "&appid=8ee06b00fae45decc9bb95425a69991a")
         .then(function(response){
@@ -314,6 +332,8 @@ function searchCity(event){
                 });
         });
 };
+
+
 london();
 searchBtn.on("click", searchCity);
 // $("#city-again").on("click", searchCity);
